@@ -33,7 +33,7 @@ fi
 
 read -p "Install Important Programs? (y/n) " install_programs
 if [[ $install_programs == "y" || $install_programs == "Y" ]]; then
-    sudo pacman -S --noconfirm git fastfetch ntfs-3g xdg-user-dirs python-pywalfox picom rofi thunar thunar-archive-plugin xarchiver unrar unzip stow obsidian mousepad vlc dunst starship mesa-utils alsa-utils
+    sudo pacman -S --noconfirm git fastfetch ntfs-3g xdg-user-dirs picom rofi thunar thunar-archive-plugin xarchiver unrar unzip stow obsidian mousepad vlc dunst starship mesa-utils alsa-utils
     xdg-user-dirs-update
 fi
 
@@ -58,7 +58,7 @@ fi
 read -p "Setup Themes? (y/n) " setup_themes
 if [[ $setup_themes == "y" || $setup_themes == "Y" ]]; then
     sudo pacman -S --noconfirm gnome-themes-extra nwg-look papirus-icon-theme 
-    yay -S --noconfirm adwaita-qt5 adwaita-qt6 qt5ct qt6ct
+    yay -S --noconfirm adwaita-qt5 adwaita-qt6 qt5ct qt6ct python-pywalfox
 fi
 
 read -p "Install Optional Softwares? (y/n) " install_important
