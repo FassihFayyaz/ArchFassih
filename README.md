@@ -22,13 +22,13 @@ Just a script to get my setup working in just a few prompts.
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/fassihfayyaz/arch-fassih.git
+git clone https://github.com/fassihfayyaz/archfassih.git
 ```
 
 2. Navigate to the project directory:
 
 ```bash
-cd arch-fassih
+cd ArchFassih
 ```
 
 3. Make the script executable:
