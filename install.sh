@@ -63,8 +63,8 @@ fi
 
 read -p "Install Optional Softwares? (y/n) " install_important
 if [[ $install_important == "y" || $install_important == "Y" ]]; then
-    sudo pacman -S --noconfirm corectrl kodi flameshot noisetorch-bin copyq qbittorrent polychromatic linux-headers
-    yay -S --noconfirm vesktop-bin green-tunnel thorium-browser-bin 
+    sudo pacman -S --noconfirm corectrl kodi flameshot copyq qbittorrent linux-headers
+    yay -S --noconfirm vesktop-bin green-tunnel thorium-browser-bin noisetorch-bin polychromatic
 fi
 
 read -p "Setup Gaming? (y/n) " setup_gaming
