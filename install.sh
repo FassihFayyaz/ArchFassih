@@ -3,7 +3,6 @@
 read -p "Install Xorg and Qtile? (y/n) " install_wm
 if [[ $install_wm == "y" || $install_wm == "Y" ]]; then
     sudo pacman -S --noconfirm xorg-server xorg-xinit xorg-apps
-    sudo mkdir ~/.xinitrc
     echo "exec /usr/bin/qtile start" >> ~/.xinitrc
     sudo pacman -S --noconfirm qtile alacritty thunar
     sudo pacman -S --noconfirm python-psutil
