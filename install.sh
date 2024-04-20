@@ -14,6 +14,7 @@ fi
 read -p "Install AUR Package Manager? (y/n) " install_aur
 if [[ $install_aur == "y" || $install_aur == "Y" ]]; then
     sudo pacman -S --noconfirm base-devel
+    cd ~
     git clone https://aur.archlinux.org/yay.git
     cd yay
     makepkg -si
@@ -48,6 +49,7 @@ fi
 
 read -p "Setup Dotfiles? (y/n) " setup_dotfiles
 if [[ $setup_dotfiles == "y" || $setup_dotfiles == "Y" ]]; then
+    cd ~
     git clone https://github.com/FassihFayyaz/dotfiles.git
     cd dotfiles/
     stow . --adopt
