@@ -1,6 +1,6 @@
-# Arch Linux Installation Script
+# My Arch Linux Setup Installation Script
 
-This is a bash script to automate the installation process of various packages and configurations on Arch Linux. The script prompts the user for each section, allowing them to choose whether to install or skip that section.
+Just a script to get my setup working in just a few prompts.
 
 ## Features
 
@@ -22,4 +22,24 @@ This is a bash script to automate the installation process of various packages a
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/arch-install-script.git
+git clone https://github.com/fassihfayyaz/arch-fassih.git
+```
+
+2. Navigate to the project directory:
+
+```bash
+cd arch-fassih
+```
+
+3. Make the script executable:
+
+```bash
+4. chmod +x install.sh
+```
+
+5. Run the script:
+
+```bash
+./install.sh
+```
+Follow the prompts and respond with y or n to install or skip each section.
