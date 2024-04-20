@@ -48,11 +48,8 @@ fi
 
 read -p "Setup Dotfiles? (y/n) " setup_dotfiles
 if [[ $setup_dotfiles == "y" || $setup_dotfiles == "Y" ]]; then
-    cd ~/Downloads || mkdir ~/Downloads && cd ~/Downloads
     git clone https://github.com/FassihFayyaz/dotfiles.git
     cd dotfiles/
-    cp -r dotfiles/ ~/
-    cd ~/dotfiles
     stow . --adopt
 fi
 
