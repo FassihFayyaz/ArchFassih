@@ -44,7 +44,7 @@ fi
 
 read -p "Install Fonts and Apps before adding dotfiles? (y/n) " install_pre_dotfiles
 if [[ $install_pre_dotfiles == "y" || $install_pre_dotfiles == "Y" ]]; then
-    sudo pacman -S --noconfirm ttf-jetbrains-mono-nerd ttf-liberation sxiv firefox firefox-i18n-ur rofi-emoji rofi-calc xdotool btop eza zoxide fzf polkit-gnome thorium-browser-bin 
+    sudo pacman -S --noconfirm ttf-jetbrains-mono-nerd ttf-liberation sxiv firefox firefox-i18n-ur rofi-emoji rofi-calc xdotool btop eza zoxide fzf polkit-gnome
 fi
 
 read -p "Setup Dotfiles? (y/n) " setup_dotfiles
@@ -64,7 +64,7 @@ fi
 read -p "Install Optional Softwares? (y/n) " install_important
 if [[ $install_important == "y" || $install_important == "Y" ]]; then
     sudo pacman -S --noconfirm corectrl kodi flameshot noisetorch-bin copyq qbittorrent polychromatic linux-headers
-    yay -S --noconfirm vesktop green-tunnel
+    yay -S --noconfirm vesktop-bin green-tunnel thorium-browser-bin 
 fi
 
 read -p "Setup Gaming? (y/n) " setup_gaming
