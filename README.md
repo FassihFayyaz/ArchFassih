@@ -2,6 +2,12 @@
 
 Just a script to get my setup working in just a few prompts.
 
+## Images in Action
+
+![Default](Images/image.png)
+![Automatic Color with Pywal](Images/image1.png)
+![Automatic Color Change with Wallpaper Change](Images/image2.png)
+
 ## Features
 
 - Install Window Manager (Qtile) and Xorg
