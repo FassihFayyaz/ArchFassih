@@ -28,7 +28,7 @@ git clone https://github.com/fassihfayyaz/archfassih.git
 2. Navigate to the project directory:
 
 ```bash
-cd ArchFassih
+cd archfassih
 ```
 
 3. Make the script executable:

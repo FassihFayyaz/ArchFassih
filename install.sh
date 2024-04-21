@@ -6,7 +6,6 @@ if [[ $install_wm == "y" || $install_wm == "Y" ]]; then
     echo "exec /usr/bin/qtile start" >> ~/.xinitrc
     sudo pacman -S --noconfirm qtile alacritty thunar
     sudo pacman -S --noconfirm python-psutil
-    yay -S --noconfirm qtile-extras
     sudo pacman -S --noconfirm python-pywal
 fi
 
@@ -43,7 +42,8 @@ fi
 
 read -p "Install Fonts and Apps before adding dotfiles? (y/n) " install_pre_dotfiles
 if [[ $install_pre_dotfiles == "y" || $install_pre_dotfiles == "Y" ]]; then
-    sudo pacman -S --noconfirm ttf-jetbrains-mono-nerd ttf-liberation sxiv firefox firefox-i18n-ur rofi-emoji rofi-calc xdotool btop eza zoxide fzf polkit-gnome
+    sudo pacman -S --noconfirm ttf-jetbrains-mono-nerd ttf-liberation sxiv firefox rofi-emoji rofi-calc xdotool btop eza zoxide fzf polkit-gnome
+    yay -S --noconfirm qtile-extras
 fi
 
 read -p "Setup Dotfiles? (y/n) " setup_dotfiles
