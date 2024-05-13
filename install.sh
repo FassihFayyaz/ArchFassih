@@ -147,8 +147,8 @@ read -p " $(printf "%$(($(tput cols)))s\n" '' | tr " " "#")
 $(printf "%$(($(tput cols)))s\n" '' | tr " " "#") " install_important
 
 if [[ $install_important == "y" || $install_important == "Y" ]]; then
-    sudo pacman -S --noconfirm corectrl kodi flameshot copyq qbittorrent linux-headers
-    $aur_helper -S --noconfirm vesktop-bin green-tunnel thorium-browser-bin noisetorch-bin polychromatic
+    sudo pacman -S --noconfirm corectrl kodi flameshot copyq qbittorrent linux-headers pavucontrol
+    $aur_helper -S --noconfirm vesktop-bin green-tunnel thorium-browser-bin noisetorch-bin polychromatic vscodium-bin
 fi
 
 ###############################################################################
