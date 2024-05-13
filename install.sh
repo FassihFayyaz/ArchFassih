@@ -66,7 +66,7 @@ read -p " $(printf "%$(($(tput cols)))s\n" '' | tr " " "#")
 $(printf "%$(($(tput cols)))s\n" '' | tr " " "#") " install_wayland
 
 if [[ $install_wayland == "y" || $install_wayland == "Y" ]]; then
-    sudo pacman -S --noconfirm python-pywlroots xorg-xwayland
+    sudo pacman -S --noconfirm python-pywlroots xorg-xwayland swww
 fi
 
 ###############################################################################
