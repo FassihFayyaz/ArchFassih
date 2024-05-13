@@ -100,7 +100,7 @@ read -p " $(printf "%$(($(tput cols)))s\n" '' | tr " " "#")
 $(printf "%$(($(tput cols)))s\n" '' | tr " " "#") " install_pre_dotfiles
 
 if [[ $install_pre_dotfiles == "y" || $install_pre_dotfiles == "Y" ]]; then
-    sudo pacman -S --noconfirm ttf-jetbrains-mono-nerd ttf-liberation sxiv firefox rofi-emoji rofi-calc xdotool btop eza zoxide fzf polkit-gnome
+    sudo pacman -S --noconfirm ttf-jetbrains-mono-nerd ttf-droid ttf-noto-fonts-emoji sxiv firefox rofi-emoji rofi-calc xdotool btop eza zoxide fzf polkit-gnome
     $aur_helper -S --noconfirm qtile-extras
 fi
 
