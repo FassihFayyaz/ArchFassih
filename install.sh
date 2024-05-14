@@ -66,7 +66,8 @@ read -p " $(printf "%$(($(tput cols)))s\n" '' | tr " " "#")
 $(printf "%$(($(tput cols)))s\n" '' | tr " " "#") " install_wayland
 
 if [[ $install_wayland == "y" || $install_wayland == "Y" ]]; then
-    sudo pacman -S --noconfirm python-pywlroots xorg-xwayland swww
+    sudo pacman -S --noconfirm python-pywlroots xorg-xwayland python-pyquery grim slurp cliphist
+    $aur_helper -S --noconfirm swww rofi-wayland swappy wl-clipboard
 fi
 
 ###############################################################################
@@ -80,14 +81,24 @@ read -p " $(printf "%$(($(tput cols)))s\n" '' | tr " " "#")
 $(printf "%$(($(tput cols)))s\n" '' | tr " " "#") " install_programs
 
 if [[ $install_programs == "y" || $install_programs == "Y" ]]; then
-    sudo pacman -S --noconfirm git fastfetch ntfs-3g xdg-user-dirs picom rofi thunar thunar-archive-plugin xarchiver unrar unzip stow obsidian mousepad vlc dunst starship mesa-utils alsa-utils
+    sudo pacman -S --noconfirm git fastfetch ntfs-3g xdg-user-dirs picom rofi thunar thunar-archive-plugin xarchiver unrar unzip stow obsidian mousepad vlc dunst starship mesa-utils alsa-utils pavucontrol playerctl pamixer
     xdg-user-dirs-update
 fi
 
-# read -p "Set Fstab Permissions? (y/n) " set_fstab
-# if [[ $set_fstab == "y" || $set_fstab == "Y" ]]; then
-# echo "uid=1000,gid=1000,rw,user,exec,umask=000" | sudo tee -a /etc/fstab
-# fi
+###############################################################################
+# #                                                                           # #
+# #                         Install Hyprland? (y/n)                           # #
+# #                                                                           # #
+###############################################################################
+
+read -p " $(printf "%$(($(tput cols)))s\n" '' | tr " " "#")
+# #                         Install Hyprland? (y/n)                           # #
+$(printf "%$(($(tput cols)))s\n" '' | tr " " "#") " install_wayland
+
+if [[ $install_wayland == "y" || $install_wayland == "Y" ]]; then
+    sudo pacman -S --noconfirm mpv
+    $aur_helper -S --noconfirm aylurs-gtk-shell hyprland hyprcursor hypridle hyprlock jq python-requests pyprland swaync waybar wlogout cava-git yt-dlp
+fi
 
 ###############################################################################
 # #                                                                           # #
@@ -101,7 +112,7 @@ $(printf "%$(($(tput cols)))s\n" '' | tr " " "#") " install_pre_dotfiles
 
 if [[ $install_pre_dotfiles == "y" || $install_pre_dotfiles == "Y" ]]; then
     sudo pacman -S --noconfirm ttf-jetbrains-mono-nerd ttf-droid ttf-noto-fonts-emoji sxiv firefox rofi-emoji rofi-calc xdotool btop eza zoxide fzf polkit-gnome
-    $aur_helper -S --noconfirm qtile-extras
+    $aur_helper -S --noconfirm qtile-extras network-manager-applet 
 fi
 
 ###############################################################################
