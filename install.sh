@@ -96,7 +96,7 @@ read -p " $(printf "%$(($(tput cols)))s\n" '' | tr " " "#")
 $(printf "%$(($(tput cols)))s\n" '' | tr " " "#") " install_wayland
 
 if [[ $install_hyprland == "y" || $install_hyprland == "Y" ]]; then
-    sudo pacman -S --noconfirm mpv python-requests swaync waybar yt-dlp
+    sudo pacman -S --noconfirm mpv python-requests swaync waybar yt-dlp yad kitty
     $aur_helper -S --noconfirm aylurs-gtk-shell hyprland hyprcursor hypridle hyprlock jq pyprland wlogout cava-git
 fi
 
