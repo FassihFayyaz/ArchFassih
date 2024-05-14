@@ -159,7 +159,7 @@ $(printf "%$(($(tput cols)))s\n" '' | tr " " "#") " install_important
 
 if [[ $install_important == "y" || $install_important == "Y" ]]; then
     sudo pacman -S --noconfirm corectrl kodi flameshot copyq qbittorrent pavucontrol
-    $aur_helper -S --noconfirm vesktop-bin green-tunnel thorium-browser-bin noisetorch-bin polychromatic vscodium-bin
+    $aur_helper -S --noconfirm vesktop-bin green-tunnel thorium-browser-bin noisetorch-bin polychromatic vscodium-bin otf-font-awesome-5
 fi
 
 ###############################################################################
