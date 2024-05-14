@@ -95,9 +95,9 @@ read -p " $(printf "%$(($(tput cols)))s\n" '' | tr " " "#")
 # #                         Install Hyprland? (y/n)                           # #
 $(printf "%$(($(tput cols)))s\n" '' | tr " " "#") " install_wayland
 
-if [[ $install_wayland == "y" || $install_wayland == "Y" ]]; then
-    sudo pacman -S --noconfirm mpv
-    $aur_helper -S --noconfirm aylurs-gtk-shell hyprland hyprcursor hypridle hyprlock jq python-requests pyprland swaync waybar wlogout cava-git yt-dlp
+if [[ $install_hyprland == "y" || $install_hyprland == "Y" ]]; then
+    sudo pacman -S --noconfirm mpv python-requests swaync waybar yt-dlp
+    $aur_helper -S --noconfirm aylurs-gtk-shell hyprland hyprcursor hypridle hyprlock jq pyprland wlogout cava-git
 fi
 
 ###############################################################################
@@ -158,7 +158,7 @@ read -p " $(printf "%$(($(tput cols)))s\n" '' | tr " " "#")
 $(printf "%$(($(tput cols)))s\n" '' | tr " " "#") " install_important
 
 if [[ $install_important == "y" || $install_important == "Y" ]]; then
-    sudo pacman -S --noconfirm corectrl kodi flameshot copyq qbittorrent linux-headers pavucontrol
+    sudo pacman -S --noconfirm corectrl kodi flameshot copyq qbittorrent pavucontrol
     $aur_helper -S --noconfirm vesktop-bin green-tunnel thorium-browser-bin noisetorch-bin polychromatic vscodium-bin
 fi
 
