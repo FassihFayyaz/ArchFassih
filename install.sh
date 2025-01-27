@@ -111,7 +111,7 @@ read -p " $(printf "%$(($(tput cols)))s\n" '' | tr " " "#")
 $(printf "%$(($(tput cols)))s\n" '' | tr " " "#") " install_pre_dotfiles
 
 if [[ $install_pre_dotfiles == "y" || $install_pre_dotfiles == "Y" ]]; then
-    sudo pacman -S --noconfirm ttf-jetbrains-mono-nerd ttf-droid ttf-noto-fonts-emoji sxiv firefox rofi-emoji rofi-calc xdotool btop eza zoxide fzf polkit-gnome
+    sudo pacman -S --noconfirm ttf-jetbrains-mono-nerd ttf-droid sxiv firefox rofi-emoji rofi-calc xdotool btop eza zoxide fzf polkit-gnome
     $aur_helper -S --noconfirm qtile-extras network-manager-applet 
 fi
 
@@ -158,8 +158,8 @@ read -p " $(printf "%$(($(tput cols)))s\n" '' | tr " " "#")
 $(printf "%$(($(tput cols)))s\n" '' | tr " " "#") " install_important
 
 if [[ $install_important == "y" || $install_important == "Y" ]]; then
-    sudo pacman -S --noconfirm corectrl kodi flameshot copyq qbittorrent pavucontrol
-    $aur_helper -S --noconfirm vesktop-bin green-tunnel thorium-browser-bin noisetorch-bin polychromatic vscodium-bin otf-font-awesome-5
+    sudo pacman -S --noconfirm corectrl flameshot copyq qbittorrent pavucontrol
+    $aur_helper -S --noconfirm vesktop-bin green-tunnel thorium-browser-bin noisetorch-bin polychromatic otf-font-awesome-5
 fi
 
 ###############################################################################
