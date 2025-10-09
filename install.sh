@@ -81,7 +81,7 @@ read -p " $(printf "%$(($(tput cols)))s\n" '' | tr " " "#")
 $(printf "%$(($(tput cols)))s\n" '' | tr " " "#") " install_programs
 
 if [[ $install_programs == "y" || $install_programs == "Y" ]]; then
-    sudo pacman -S --noconfirm git fastfetch ntfs-3g xdg-user-dirs picom rofi thunar thunar-archive-plugin xarchiver unrar unzip stow obsidian mousepad vlc dunst starship mesa-utils alsa-utils pavucontrol playerctl pamixer
+    sudo pacman -S --noconfirm git fastfetch nitrogen ntfs-3g xdg-user-dirs picom rofi thunar thunar-archive-plugin xarchiver unrar unzip stow obsidian mousepad vlc dunst starship mesa-utils alsa-utils pavucontrol playerctl pamixer
     xdg-user-dirs-update
 fi
 
@@ -145,6 +145,7 @@ $(printf "%$(($(tput cols)))s\n" '' | tr " " "#") " setup_themes
 if [[ $setup_themes == "y" || $setup_themes == "Y" ]]; then
     sudo pacman -S --noconfirm gnome-themes-extra nwg-look papirus-icon-theme
     $aur_helper -S --noconfirm adwaita-qt5 adwaita-qt6 qt5ct qt6ct python-pywalfox
+    wal -i ~/Pictures/wallpaper/3d-tech.jpg
 fi
 
 ###############################################################################
