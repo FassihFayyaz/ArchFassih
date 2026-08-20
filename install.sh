@@ -38,4 +38,41 @@ if [[ $REPLY == "y" || $REPLY == "Y" ]]; then
     echo ":: Noctalia installed. Reboot or restart niri to apply."
 fi
 
+###############################################################################
+#              Set up CachyOS repositories (mirrors + packages)              #
+###############################################################################
+read -p "Set up CachyOS repositories? (y/n) " -r
+if [[ $REPLY == "y" || $REPLY == "Y" ]]; then
+    echo ":: Downloading and running the CachyOS repo installer"
+    cd /tmp
+    curl -O https://mirror.cachyos.org/cachyos-repo.tar.xz
+    tar xvf cachyos-repo.tar.xz
+    cd cachyos-repo
+    sudo ./cachyos-repo.sh
+
+    echo ":: Syncing mirrors and updating all packages"
+    sudo pacman -Syyu --noconfirm
+fi
+
+###############################################################################
+#                         Set up Chaotic-AUR repository                      #
+###############################################################################
+read -p "Set up Chaotic-AUR repository? (y/n) " -r
+if [[ $REPLY == "y" || $REPLY == "Y" ]]; then
+    echo ":: Importing and trusting the Chaotic-AUR signing key"
+    sudo pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
+    sudo pacman-key --lsign-key 3056513887B78AEB
+
+    echo ":: Installing chaotic-keyring and chaotic-mirrorlist"
+    sudo pacman -U --noconfirm 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst'
+    sudo pacman -U --noconfirm 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
+
+    echo ":: Appending [chaotic-aur] to /etc/pacman.conf"
+    if ! grep -q '\[chaotic-aur\]' /etc/pacman.conf; then
+        printf '\n[chaotic-aur]\nInclude = /etc/pacman.d/chaotic-mirrorlist\n' | sudo tee -a /etc/pacman.conf
+    else
+        echo ":: [chaotic-aur] already present, skipping"
+    fi
+fi
+
 echo ":: Done. More sections coming soon."
