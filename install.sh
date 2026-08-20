@@ -152,4 +152,19 @@ if [[ $REPLY == "y" || $REPLY == "Y" ]]; then
     fi
 fi
 
+###############################################################################
+#                              Setup Gaming                                   #
+###############################################################################
+read -p "Setup gaming (steam, lutris, goverlay, mangohud, gamemode, protonplus)? (y/n) " -r
+if [[ $REPLY == "y" || $REPLY == "Y" ]]; then
+    echo ":: Enabling multilib repo (required for steam)"
+    if ! grep -q '^\[multilib\]' /etc/pacman.conf; then
+        sudo sed -i '/^#\[multilib\]/{s/^#//;n;s/^#//}' /etc/pacman.conf
+        sudo pacman -Syy
+    fi
+
+    echo ":: Installing gaming packages"
+    sudo pacman -S --noconfirm steam lutris goverlay mangohud gamemode protonplus
+fi
+
 echo ":: Done. More sections coming soon."
