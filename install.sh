@@ -104,4 +104,13 @@ if [[ $REPLY == "y" || $REPLY == "Y" ]]; then
     sudo pacman -S --noconfirm starship fzf zoxide eza
 fi
 
+###############################################################################
+#                               Install fonts                                 #
+###############################################################################
+read -p "Install fonts (jetbrains-mono-nerd)? (y/n) " -r
+if [[ $REPLY == "y" || $REPLY == "Y" ]]; then
+    echo ":: Installing fonts"
+    sudo pacman -S --noconfirm ttf-jetbrains-mono-nerd
+fi
+
 echo ":: Done. More sections coming soon."
