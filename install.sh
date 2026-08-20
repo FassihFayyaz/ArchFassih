@@ -163,6 +163,9 @@ if [[ $REPLY == "y" || $REPLY == "Y" ]]; then
     echo ":: Installing limine-mkinitcpio-hook (auto-manages kernel boot entries)"
     sudo pacman -S --noconfirm limine-mkinitcpio-hook
 
+    echo ":: Removing stale archinstall limine configs (limine loads them before the hook-managed /boot/efi/limine.conf)"
+    sudo rm -f /boot/efi/EFI/BOOT/limine.conf /boot/efi/limine/limine.conf /boot/limine.conf
+
     echo ":: Regenerating limine boot entries for all installed kernels"
     sudo limine-mkinitcpio
 fi
