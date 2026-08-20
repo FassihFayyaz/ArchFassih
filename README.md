@@ -1,51 +1,31 @@
 # My Arch Linux Setup Installation Script
 
-Just a script to get my setup working in just a few prompts.
+Script to take a fresh `archinstall` minimal install (niri profile) up to my working niri + Noctalia setup.
 
-## Images in Action
+## Baseline: what archinstall already sets up
 
-![Default](Images/image.png)
-![Automatic Color with Pywal](Images/image1.png)
-![Automatic Color Change with Wallpaper Change](Images/image2.png)
+1. Run `archinstall` with the **niri (waybar)** profile.
+2. During archinstall, select:
+   - NVIDIA drivers
+   - `sddm` as display manager
+   - `pipewire` for audio
+   - `linux-zen` as kernel
+   - All fonts **except** `noto-cjk`
+3. The niri profile installs: `niri`, `alacritty`, `fuzzel`, `mako`, `xorg-xwayland`, `waybar`, `swaybg`, `swayidle`, `swaylock`, `xdg-desktop-portal-gnome`.
 
-## Features
+After first boot the script takes over.
 
-- Install Window Manager (Qtile) and Xorg
-- Install AUR package manager (yay)
-- Install Wayland
-- Install essential programs and utilities
-- Set FSTAB permissions
-- Setup fast mirrors
-- Install apps before adding dotfiles
-- Setup dotfiles
-- Install themes and appearance-related packages
-- Install sound utilities
-- Install important softwares (CoreCtrl, Kodi, Flameshot, etc.)
-- Setup gaming environment (Steam, Lutris, Wine, etc.)
+## Current status
+
+- [x] Install Noctalia shell and configure niri to use it (removes `waybar` + `fuzzel`)
+- [ ] Install AUR helper
+- [ ] More steps coming...
 
 ## Usage
 
-1. Clone the repository:
-
 ```bash
 git clone https://github.com/fassihfayyaz/archfassih.git
-```
-
-2. Navigate to the project directory:
-
-```bash
 cd archfassih
-```
-
-3. Make the script executable:
-
-```bash
-4. chmod +x install.sh
-```
-
-5. Run the script:
-
-```bash
+chmod +x install.sh
 ./install.sh
 ```
-Follow the prompts and respond with y or n to install or skip each section.

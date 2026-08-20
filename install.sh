@@ -1,179 +1,41 @@
 #!/bin/bash
-
 #####################################
 #    Created by Fassih Fayyaz       #
 #####################################
 
+set -euo pipefail
+
 ###############################################################################
-# #                                                                           # #
-# #                        Install Xorg and Qtile? (y/n)                     # #
-# #                                                                           # #
+#   Runs on top of: archinstall minimal with the niri (waybar) profile.      #
+#   archinstall already provides: niri, alacritty, fuzzel, mako, waybar,     #
+#   swaybg, swayidle, swaylock, sddm, pipewire, nvidia drivers, linux-zen.   #
 ###############################################################################
 
-read -p " $(printf "%$(($(tput cols)))s\n" '' | tr " " "#")
-# #                        Install Xorg and Qtile? (y/n)                     # #
-$(printf "%$(($(tput cols)))s\n" '' | tr " " "#") " install_wm
+NIRI_CONFIG="$HOME/.config/niri/config.kdl"
 
-if [[ $install_wm == "y" || $install_wm == "Y" ]]; then
-    sudo pacman -S --noconfirm xorg-server xorg-xinit xorg-apps
-    echo "exec /usr/bin/qtile start" >> ~/.xinitrc
-    sudo pacman -S --noconfirm qtile alacritty thunar
-    sudo pacman -S --noconfirm python-psutil
-    sudo pacman -S --noconfirm python-pywal
+echo ":: ArchFassih setup for niri"
+
+###############################################################################
+#                        Install Noctalia shell                              #
+###############################################################################
+read -p "Install Noctalia shell and set up niri for it? (y/n) " -r
+if [[ $REPLY == "y" || $REPLY == "Y" ]]; then
+    echo ":: Installing noctalia"
+    sudo pacman -S --noconfirm noctalia
+
+    echo ":: Removing waybar and fuzzel (Noctalia replaces them)"
+    sudo pacman -Rns --noconfirm waybar fuzzel
+
+    echo ":: Adding noctalia to niri config"
+    mkdir -p "$(dirname "$NIRI_CONFIG")"
+    if ! grep -q 'spawn-at-startup "noctalia"' "$NIRI_CONFIG" 2>/dev/null; then
+        sed -i 's|// spawn-at-startup "noctalia"|spawn-at-startup "noctalia"|' "$NIRI_CONFIG"
+        if ! grep -q 'spawn-at-startup "noctalia"' "$NIRI_CONFIG"; then
+            printf '\nspawn-at-startup "noctalia"\n' >> "$NIRI_CONFIG"
+        fi
+    fi
+
+    echo ":: Noctalia installed. Reboot or restart niri to apply."
 fi
 
-###############################################################################
-# #                                                                           # #
-# #                     Install AUR Package Manager? (yay/paru)              # #
-# #                                                                           # #
-###############################################################################
-
-read -p " $(printf "%$(($(tput cols)))s\n" '' | tr " " "#")
-# #                     Install AUR Package Manager? (yay/paru)              # #
-$(printf "%$(($(tput cols)))s\n" '' | tr " " "#") " aur_helper
-
-if [[ $aur_helper == "yay" || $aur_helper == "paru" ]]; then
-    sudo pacman -S --noconfirm base-devel
-    cd ~
-    git clone https://aur.archlinux.org/$aur_helper.git
-    cd $aur_helper
-    makepkg -si
-fi
-
-###############################################################################
-# #                                                                           # #
-# #                        Setup Fast Mirrors? (y/n)                         # #
-# #                                                                           # #
-###############################################################################
-
-read -p " $(printf "%$(($(tput cols)))s\n" '' | tr " " "#")
-# #                        Setup Fast Mirrors? (y/n)                         # #
-$(printf "%$(($(tput cols)))s\n" '' | tr " " "#") " setup_mirrors
-
-if [[ $setup_mirrors == "y" || $setup_mirrors == "Y" ]]; then
-    $aur_helper -S --noconfirm rate-mirrors
-    rate-mirrors arch | sudo tee /etc/pacman.d/mirrorlist
-fi
-
-###############################################################################
-# #                                                                           # #
-# #                         Install Wayland? (y/n)                           # #
-# #                                                                           # #
-###############################################################################
-
-read -p " $(printf "%$(($(tput cols)))s\n" '' | tr " " "#")
-# #                         Install Wayland? (y/n)                           # #
-$(printf "%$(($(tput cols)))s\n" '' | tr " " "#") " install_wayland
-
-if [[ $install_wayland == "y" || $install_wayland == "Y" ]]; then
-    sudo pacman -S --noconfirm python-pywlroots xorg-xwayland python-pyquery grim slurp cliphist
-    $aur_helper -S --noconfirm swww rofi-wayland swappy wl-clipboard
-fi
-
-###############################################################################
-# #                                                                           # #
-# #                    Install Important Programs? (y/n)                     # #
-# #                                                                           # #
-###############################################################################
-
-read -p " $(printf "%$(($(tput cols)))s\n" '' | tr " " "#")
-# #                    Install Important Programs? (y/n)                     # #
-$(printf "%$(($(tput cols)))s\n" '' | tr " " "#") " install_programs
-
-if [[ $install_programs == "y" || $install_programs == "Y" ]]; then
-    sudo pacman -S --noconfirm git fastfetch nitrogen ntfs-3g xdg-user-dirs picom rofi thunar thunar-archive-plugin xarchiver unrar unzip stow obsidian mousepad vlc dunst starship mesa-utils alsa-utils pavucontrol playerctl pamixer
-    xdg-user-dirs-update
-fi
-
-###############################################################################
-# #                                                                           # #
-# #                         Install Hyprland? (y/n)                           # #
-# #                                                                           # #
-###############################################################################
-
-read -p " $(printf "%$(($(tput cols)))s\n" '' | tr " " "#")
-# #                         Install Hyprland? (y/n)                           # #
-$(printf "%$(($(tput cols)))s\n" '' | tr " " "#") " install_wayland
-
-if [[ $install_hyprland == "y" || $install_hyprland == "Y" ]]; then
-    sudo pacman -S --noconfirm mpv python-requests swaync waybar yt-dlp yad kitty
-    $aur_helper -S --noconfirm aylurs-gtk-shell hyprland hyprcursor hypridle hyprlock jq pyprland wlogout cava-git
-fi
-
-###############################################################################
-# #                                                                           # #
-# #           Install Fonts and Apps before adding dotfiles? (y/n)           # #
-# #                                                                           # #
-###############################################################################
-
-read -p " $(printf "%$(($(tput cols)))s\n" '' | tr " " "#")
-# #           Install Fonts and Apps before adding dotfiles? (y/n)           # #
-$(printf "%$(($(tput cols)))s\n" '' | tr " " "#") " install_pre_dotfiles
-
-if [[ $install_pre_dotfiles == "y" || $install_pre_dotfiles == "Y" ]]; then
-    sudo pacman -S --noconfirm ttf-jetbrains-mono-nerd ttf-droid sxiv firefox rofi-emoji rofi-calc xdotool btop eza zoxide fzf polkit-gnome
-    $aur_helper -S --noconfirm qtile-extras network-manager-applet 
-fi
-
-###############################################################################
-# #                                                                           # #
-# #                         Setup Dotfiles? (y/n)                            # #
-# #                                                                           # #
-###############################################################################
-
-read -p " $(printf "%$(($(tput cols)))s\n" '' | tr " " "#")
-# #                         Setup Dotfiles? (y/n)                            # #
-$(printf "%$(($(tput cols)))s\n" '' | tr " " "#") " setup_dotfiles
-
-if [[ $setup_dotfiles == "y" || $setup_dotfiles == "Y" ]]; then
-    cd ~
-    git clone https://github.com/FassihFayyaz/dotfiles.git
-    cd dotfiles/
-    stow . --adopt
-fi
-
-###############################################################################
-# #                                                                           # #
-# #                          Setup Themes? (y/n)                             # #
-# #                                                                           # #
-###############################################################################
-
-read -p " $(printf "%$(($(tput cols)))s\n" '' | tr " " "#")
-# #                          Setup Themes? (y/n)                             # #
-$(printf "%$(($(tput cols)))s\n" '' | tr " " "#") " setup_themes
-
-if [[ $setup_themes == "y" || $setup_themes == "Y" ]]; then
-    sudo pacman -S --noconfirm gnome-themes-extra nwg-look papirus-icon-theme
-    $aur_helper -S --noconfirm adwaita-qt5 adwaita-qt6 qt5ct qt6ct python-pywalfox
-    wal -i ~/Pictures/wallpaper/3d-tech.jpg
-fi
-
-###############################################################################
-# #                                                                           # #
-# #                    Install Optional Softwares? (y/n)                     # #
-# #                                                                           # #
-###############################################################################
-
-read -p " $(printf "%$(($(tput cols)))s\n" '' | tr " " "#")
-# #                    Install Optional Softwares? (y/n)                     # #
-$(printf "%$(($(tput cols)))s\n" '' | tr " " "#") " install_important
-
-if [[ $install_important == "y" || $install_important == "Y" ]]; then
-    sudo pacman -S --noconfirm corectrl flameshot copyq qbittorrent pavucontrol
-    $aur_helper -S --noconfirm vesktop-bin green-tunnel thorium-browser-bin noisetorch-bin polychromatic otf-font-awesome-5
-fi
-
-###############################################################################
-# #                                                                           # #
-# #                          Setup Gaming? (y/n)                             # #
-# #                                                                           # #
-###############################################################################
-
-read -p " $(printf "%$(($(tput cols)))s\n" '' | tr " " "#")
-# #                          Setup Gaming? (y/n)                             # #
-$(printf "%$(($(tput cols)))s\n" '' | tr " " "#") " setup_gaming
-
-if [[ $setup_gaming == "y" || $setup_gaming == "Y" ]]; then
-   sudo pacman -S --noconfirm steam lutris goverlay mangohud gamemode wine-staging
-   $aur_helper -S --noconfirm protonup-qt-bin
-fi
+echo ":: Done. More sections coming soon."
