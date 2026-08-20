@@ -163,6 +163,9 @@ if [[ $REPLY == "y" || $REPLY == "Y" ]]; then
         sudo pacman -Syy
     fi
 
+    echo ":: Installing lib32-nvidia-utils first to avoid the vulkan provider prompt"
+    sudo pacman -S --noconfirm lib32-nvidia-utils
+
     echo ":: Installing gaming packages"
     sudo pacman -S --noconfirm steam lutris goverlay mangohud gamemode protonplus
 fi
