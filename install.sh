@@ -82,8 +82,8 @@ read -p "Install essential applications? (y/n) " -r
 if [[ $REPLY == "y" || $REPLY == "Y" ]]; then
     echo ":: Installing essential apps"
     sudo pacman -S --noconfirm fastfetch thunar zed opencode github-cli
-    echo ":: Installing brave-origin-bin"
-    sudo pacman -S --noconfirm brave-origin-bin
+    echo ":: Installing brave-origin-bin and vesktop-bin"
+    sudo pacman -S --noconfirm brave-origin-bin vesktop-bin
 fi
 
 ###############################################################################
