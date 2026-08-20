@@ -55,6 +55,24 @@ if [[ $REPLY == "y" || $REPLY == "Y" ]]; then
 fi
 
 ###############################################################################
+#                  Install CachyOS kernel + limine hook                       #
+###############################################################################
+read -p "Install CachyOS kernel (linux-cachyos) and set up limine? (y/n) " -r
+if [[ $REPLY == "y" || $REPLY == "Y" ]]; then
+    echo ":: Installing linux-cachyos kernel and headers"
+    sudo pacman -S --noconfirm linux-cachyos linux-cachyos-headers
+
+    echo ":: Installing limine-mkinitcpio-hook (auto-manages kernel boot entries)"
+    sudo pacman -S --noconfirm limine-mkinitcpio-hook
+
+    echo ":: Removing stale archinstall limine configs (limine loads them before the hook-managed /boot/limine.conf)"
+    sudo rm -f /boot/EFI/BOOT/limine.conf /boot/limine.conf
+
+    echo ":: Regenerating limine boot entries for all installed kernels"
+    sudo limine-mkinitcpio
+fi
+
+###############################################################################
 #                         Set up Chaotic-AUR repository                      #
 ###############################################################################
 read -p "Set up Chaotic-AUR repository? (y/n) " -r
@@ -150,24 +168,6 @@ if [[ $REPLY == "y" || $REPLY == "Y" ]]; then
     if [[ $REPLY == "y" || $REPLY == "Y" ]]; then
         qt5ct
     fi
-fi
-
-###############################################################################
-#                  Install CachyOS kernel + limine hook                       #
-###############################################################################
-read -p "Install CachyOS kernel (linux-cachyos) and set up limine? (y/n) " -r
-if [[ $REPLY == "y" || $REPLY == "Y" ]]; then
-    echo ":: Installing linux-cachyos kernel and headers"
-    sudo pacman -S --noconfirm linux-cachyos linux-cachyos-headers
-
-    echo ":: Installing limine-mkinitcpio-hook (auto-manages kernel boot entries)"
-    sudo pacman -S --noconfirm limine-mkinitcpio-hook
-
-    echo ":: Removing stale archinstall limine configs (limine loads them before the hook-managed /boot/limine.conf)"
-    sudo rm -f /boot/EFI/BOOT/limine.conf /boot/limine.conf
-
-    echo ":: Regenerating limine boot entries for all installed kernels"
-    sudo limine-mkinitcpio
 fi
 
 ###############################################################################
