@@ -86,4 +86,13 @@ if [[ $REPLY == "y" || $REPLY == "Y" ]]; then
     sudo pacman -S --noconfirm brave-origin-bin
 fi
 
+###############################################################################
+#                         Install utilities (archives, etc.)                  #
+###############################################################################
+read -p "Install utilities (ntfs-3g, archive tools, stow)? (y/n) " -r
+if [[ $REPLY == "y" || $REPLY == "Y" ]]; then
+    echo ":: Installing utilities"
+    sudo pacman -S --noconfirm ntfs-3g thunar-archive-plugin xarchiver unrar unzip stow
+fi
+
 echo ":: Done. More sections coming soon."
