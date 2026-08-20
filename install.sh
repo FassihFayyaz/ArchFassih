@@ -113,4 +113,43 @@ if [[ $REPLY == "y" || $REPLY == "Y" ]]; then
     sudo pacman -S --noconfirm ttf-jetbrains-mono-nerd
 fi
 
+###############################################################################
+#                            GTK Theming (nwg-look)                           #
+###############################################################################
+read -p "Set up GTK theming (nwg-look, papirus, adw-gtk-theme)? (y/n) " -r
+if [[ $REPLY == "y" || $REPLY == "Y" ]]; then
+    echo ":: Installing GTK theming packages"
+    sudo pacman -S --noconfirm nwg-look papirus-icon-theme adw-gtk-theme
+    echo ":: Open nwg-look and set: adwaita-dark theme, JetBrains Mono Nerd Font as default,"
+    echo ":: adwaita cursor, and Papirus-Dark icons."
+    read -p "Launch nwg-look now? (y/n) " -r
+    if [[ $REPLY == "y" || $REPLY == "Y" ]]; then
+        nwg-look
+    fi
+fi
+
+###############################################################################
+#                            QT Theming (qt5ct/qt6ct)                         #
+###############################################################################
+read -p "Set up QT theming (qt5ct, qt6ct, kvantum)? (y/n) " -r
+if [[ $REPLY == "y" || $REPLY == "Y" ]]; then
+    echo ":: Installing QT theming packages"
+    sudo pacman -S --noconfirm qt5ct qt6ct kvantum
+
+    echo ":: Setting QT_QPA_PLATFORMTHEME=qt6ct in ~/.bashrc"
+    if ! grep -q 'QT_QPA_PLATFORMTHEME=qt6ct' "$HOME/.bashrc" 2>/dev/null; then
+        printf '\nexport QT_QPA_PLATFORMTHEME=qt6ct\n' >> "$HOME/.bashrc"
+    fi
+
+    echo ":: Open qt6ct/qt5ct and set: Kvantum dark theme, JetBrains Mono font, Papirus-Dark icons."
+    read -p "Launch qt6ct now? (y/n) " -r
+    if [[ $REPLY == "y" || $REPLY == "Y" ]]; then
+        qt6ct
+    fi
+    read -p "Launch qt5ct now? (y/n) " -r
+    if [[ $REPLY == "y" || $REPLY == "Y" ]]; then
+        qt5ct
+    fi
+fi
+
 echo ":: Done. More sections coming soon."
