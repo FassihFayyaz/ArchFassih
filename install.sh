@@ -23,8 +23,8 @@ if [[ $REPLY == "y" || $REPLY == "Y" ]]; then
     echo ":: Installing noctalia"
     sudo pacman -S --noconfirm noctalia
 
-    echo ":: Removing waybar and fuzzel (Noctalia replaces them)"
-    sudo pacman -Rns --noconfirm waybar fuzzel
+    echo ":: Removing waybar, fuzzel, network-manager-applet (Noctalia replaces them)"
+    sudo pacman -Rns --noconfirm waybar fuzzel network-manager-applet
 
     echo ":: Adding noctalia to niri config"
     mkdir -p "$(dirname "$NIRI_CONFIG")"
