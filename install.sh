@@ -95,4 +95,13 @@ if [[ $REPLY == "y" || $REPLY == "Y" ]]; then
     sudo pacman -S --noconfirm ntfs-3g thunar-archive-plugin xarchiver unrar unzip stow
 fi
 
+###############################################################################
+#                              Install shell tools                            #
+###############################################################################
+read -p "Install shell tools (starship, fzf, zoxide, eza)? (y/n) " -r
+if [[ $REPLY == "y" || $REPLY == "Y" ]]; then
+    echo ":: Installing shell tools"
+    sudo pacman -S --noconfirm starship fzf zoxide eza
+fi
+
 echo ":: Done. More sections coming soon."
