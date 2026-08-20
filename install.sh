@@ -11,8 +11,6 @@ set -euo pipefail
 #   swaybg, swayidle, swaylock, sddm, pipewire, nvidia drivers, linux-zen.   #
 ###############################################################################
 
-NIRI_CONFIG="$HOME/.config/niri/config.kdl"
-
 echo ":: ArchFassih setup for niri"
 
 ###############################################################################
@@ -26,16 +24,7 @@ if [[ $REPLY == "y" || $REPLY == "Y" ]]; then
     echo ":: Removing waybar, fuzzel, network-manager-applet (Noctalia replaces them)"
     sudo pacman -Rns --noconfirm waybar fuzzel network-manager-applet
 
-    echo ":: Adding noctalia to niri config"
-    mkdir -p "$(dirname "$NIRI_CONFIG")"
-    if ! grep -q 'spawn-at-startup "noctalia"' "$NIRI_CONFIG" 2>/dev/null; then
-        sed -i 's|// spawn-at-startup "noctalia"|spawn-at-startup "noctalia"|' "$NIRI_CONFIG"
-        if ! grep -q 'spawn-at-startup "noctalia"' "$NIRI_CONFIG"; then
-            printf '\nspawn-at-startup "noctalia"\n' >> "$NIRI_CONFIG"
-        fi
-    fi
-
-    echo ":: Noctalia installed. Reboot or restart niri to apply."
+    echo ":: Noctalia installed. (niri config comes from dotfiles)"
 fi
 
 ###############################################################################
