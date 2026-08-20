@@ -153,6 +153,21 @@ if [[ $REPLY == "y" || $REPLY == "Y" ]]; then
 fi
 
 ###############################################################################
+#                  Install CachyOS kernel + limine hook                       #
+###############################################################################
+read -p "Install CachyOS kernel (linux-cachyos) and set up limine? (y/n) " -r
+if [[ $REPLY == "y" || $REPLY == "Y" ]]; then
+    echo ":: Installing linux-cachyos kernel and headers"
+    sudo pacman -S --noconfirm linux-cachyos linux-cachyos-headers
+
+    echo ":: Installing limine-mkinitcpio-hook (auto-manages kernel boot entries)"
+    sudo pacman -S --noconfirm limine-mkinitcpio-hook
+
+    echo ":: Regenerating limine boot entries for all installed kernels"
+    sudo limine-mkinitcpio
+fi
+
+###############################################################################
 #                              Setup Gaming                                   #
 ###############################################################################
 read -p "Setup gaming (steam, lutris, goverlay, mangohud, gamemode, protonplus)? (y/n) " -r

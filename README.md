@@ -12,6 +12,7 @@ Script to take a fresh `archinstall` minimal install (niri profile) up to my wor
    - `linux-zen` as kernel
    - All fonts **except** `noto-cjk`
 3. The niri profile installs: `niri`, `alacritty`, `fuzzel`, `mako`, `xorg-xwayland`, `waybar`, `swaybg`, `swayidle`, `swaylock`, `xdg-desktop-portal-gnome`.
+4. **Limine** is chosen as the bootloader (not systemd-boot or GRUB).
 
 After first boot the script takes over.
 
