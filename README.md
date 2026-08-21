@@ -19,8 +19,24 @@ After first boot the script takes over.
 ## Current status
 
 - [x] Install Noctalia shell and configure niri to use it (removes `waybar` + `fuzzel`)
-- [ ] Install AUR helper
+- [x] Install CachyOS repos and CachyOS kernel
+- [x] Install Chaotic-AUR
+- [x] Install essential apps
+- [x] Install utilities and shell tools
+- [x] Install fonts, GTK/QT theming, gaming packages
 - [ ] More steps coming...
+
+## Dotfiles
+
+Dotfiles live in a separate repo: [FassihFayyaz/dotfiles](https://github.com/FassihFayyaz/dotfiles).
+
+After cloning, symlink everything into your home directory with GNU Stow:
+
+```bash
+git clone https://github.com/FassihFayyaz/dotfiles.git ~/dotfiles
+cd ~/dotfiles
+stow -t ~ */
+```
 
 ## Usage
 
