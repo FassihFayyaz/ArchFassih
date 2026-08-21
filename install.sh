@@ -21,8 +21,8 @@ if [[ $REPLY == "y" || $REPLY == "Y" ]]; then
     echo ":: Installing noctalia"
     sudo pacman -S --noconfirm noctalia
 
-    echo ":: Removing waybar, fuzzel, network-manager-applet, swaylock, playerctl (Noctalia replaces them)"
-    sudo pacman -Rns --noconfirm waybar fuzzel network-manager-applet swaylock playerctl
+    echo ":: Removing waybar, fuzzel, network-manager-applet, swaylock, playerctl, htop (Noctalia replaces them)"
+    sudo pacman -Rns --noconfirm waybar fuzzel network-manager-applet swaylock playerctl htop
 
     echo ":: Noctalia installed. (niri config comes from dotfiles)"
 fi
