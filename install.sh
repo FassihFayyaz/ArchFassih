@@ -96,6 +96,19 @@ if [[ $REPLY == "y" || $REPLY == "Y" ]]; then
 fi
 
 ###############################################################################
+#                         Install flatpak and flatpak apps                    #
+###############################################################################
+read -p "Install flatpak + Stremio/Flatseal? (y/n) " -r
+if [[ $REPLY == "y" || $REPLY == "Y" ]]; then
+    echo ":: Installing flatpak"
+    sudo pacman -S --noconfirm flatpak
+    echo ":: Adding flathub remote"
+    sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    echo ":: Installing Stremio and Flatseal"
+    flatpak install --noninteractive flathub com.stremio.Stremio com.github.tchx84.Flatseal
+fi
+
+###############################################################################
 #                         Install utilities (archives, etc.)                  #
 ###############################################################################
 read -p "Install utilities (ntfs-3g, archive tools, stow)? (y/n) " -r
